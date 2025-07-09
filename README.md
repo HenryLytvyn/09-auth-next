@@ -48,4 +48,4 @@ Check out our
 [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying)
 for more details.
 
-Documentation to backend: https://notehub-public.goit.study/api/docs
+Documentation to backend: https://notehub-api.goit.study/docs
