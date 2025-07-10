@@ -1,3 +1,3 @@
-export type authStore = {
+export type Users = {
   tototo: string;
 };
