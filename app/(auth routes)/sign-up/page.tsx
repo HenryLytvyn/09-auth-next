@@ -1,12 +1,24 @@
-'use-client';
+// 'use-client';
 
+import { RegisterRequest } from '@/types/apiRequestTypes';
 import css from './SignUpPage.module.css';
+import { register } from '@/lib/api';
+import { useRouter } from 'next/navigation';
 
-export default function SignUp() {
+export default function Register() {
+  const router = useRouter();
+  async function handleRegister(formData: FormData) {
+    const payload = Object.fromEntries(formData) as RegisterRequest;
+    const response = await register(payload);
+    if (response) {
+      router.push('/profile');
+    }
+  }
+
   return (
     <>
       <h1 className={css.formTitle}>Sign up</h1>
-      <form className={css.form}>
+      <form action={handleRegister} className={css.form}>
         <div className={css.formGroup}>
           <label htmlFor="email">Email</label>
           <input

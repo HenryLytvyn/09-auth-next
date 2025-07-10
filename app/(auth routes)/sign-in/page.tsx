@@ -1,8 +1,23 @@
-import css from './SignInPage.module.css';
+'use client';
 
-export default function SignIn() {
+import { useRouter } from 'next/navigation';
+import css from './SignInPage.module.css';
+import { LoginRequest } from '@/types/apiRequestTypes';
+import { login } from '@/lib/api';
+
+export default function Login() {
+  const router = useRouter();
+
+  async function handleLogin(formData: FormData) {
+    const payload = Object.fromEntries(formData) as LoginRequest;
+    const response = await login(payload);
+    if (response) {
+      router.push('/profile');
+    }
+  }
+
   return (
-    <form className={css.form}>
+    <form action={handleLogin} className={css.form}>
       <h1 className={css.formTitle}>Sign in</h1>
 
       <div className={css.formGroup}>

@@ -8,7 +8,7 @@ import css from './NotesPage.module.css';
 import SearchBox from '@/components/SearchBox/SearchBox';
 import Pagination from '@/components/Pagination/Pagination';
 import NoteList from '@/components/NoteList/NoteList';
-import { ResponseGetData } from '@/types/ResponseGetData';
+import { ResponseGetData } from '@/types/apiResponseTypes';
 import Link from 'next/link';
 
 type Props = {
