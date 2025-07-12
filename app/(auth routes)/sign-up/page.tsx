@@ -2,16 +2,30 @@
 
 import { RegisterRequest } from '@/types/apiRequestTypes';
 import css from './SignUpPage.module.css';
-import { register } from '@/lib/api';
 import { useRouter } from 'next/navigation';
+import { register } from '@/lib/api/clientApi';
+import { useState } from 'react';
+import { useAuthStore } from '@/lib/store/authStore';
 
 export default function Register() {
   const router = useRouter();
+  const [error, setError] = useState('');
+  const setUser = useAuthStore(state => state.setUser);
+
   async function handleRegister(formData: FormData) {
-    const payload = Object.fromEntries(formData) as RegisterRequest;
-    const response = await register(payload);
-    if (response) {
-      router.push('/profile');
+    try {
+      const formValues = Object.fromEntries(formData) as RegisterRequest;
+      const res = await register(formValues);
+      if (res) {
+        // Записуємо користувача у глобальний стан
+        setUser(res);
+        router.push('/profile');
+      } else {
+        setError('Invalid email or password');
+      }
+    } catch (error) {
+      console.log('error', error);
+      setError('Invalid email or password');
     }
   }
 
@@ -47,7 +61,7 @@ export default function Register() {
           </button>
         </div>
 
-        <p className={css.error}>Error</p>
+        <p className={css.error}>{error}</p>
       </form>
     </>
   );

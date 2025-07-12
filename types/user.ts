@@ -1,3 +1,5 @@
 export type User = {
-  tototo: string;
+  username: string;
+  email: string;
+  avatar?: string;
 };

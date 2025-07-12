@@ -3,18 +3,32 @@
 import { useRouter } from 'next/navigation';
 import css from './SignInPage.module.css';
 import { LoginRequest } from '@/types/apiRequestTypes';
-import { login } from '@/lib/api';
+import { login } from '@/lib/api/clientApi';
+import { useAuthStore } from '@/lib/store/authStore';
+import { useState } from 'react';
 
 export default function Login() {
   const router = useRouter();
+  const [error, setError] = useState('');
+  // Отримуємо метод із стора
+  const setUser = useAuthStore(state => state.setUser);
 
-  async function handleLogin(formData: FormData) {
-    const payload = Object.fromEntries(formData) as LoginRequest;
-    const response = await login(payload);
-    if (response) {
-      router.push('/profile');
+  const handleLogin = async (formData: FormData) => {
+    try {
+      const formValues = Object.fromEntries(formData) as LoginRequest;
+      const res = await login(formValues);
+      if (res) {
+        // Записуємо користувача у глобальний стан
+        setUser(res);
+        router.push('/profile');
+      } else {
+        setError('Invalid email or password');
+      }
+    } catch (error) {
+      console.log('error', error);
+      setError('Invalid email or password');
     }
-  }
+  };
 
   return (
     <form action={handleLogin} className={css.form}>
