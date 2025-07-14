@@ -11,7 +11,6 @@ export default async function Header() {
       </Link>
       <nav aria-label="Main Navigation">
         <ul className={css.navigation}>
-          <AuthNavigation />
           <li className={css.navigationItem}>
             <Link className={css.navigationLink} href="/">
               Home
@@ -20,6 +19,7 @@ export default async function Header() {
           <li>
             <TagsMenu />
           </li>
+          <AuthNavigation />
         </ul>
       </nav>
     </header>

@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import { fetchNoteById } from '@/lib/api/clientApi';
+import { fetchNoteById } from '@/lib/api/api';
 import { format, parseISO } from 'date-fns';
 // import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';

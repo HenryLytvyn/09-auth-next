@@ -5,7 +5,6 @@ import Footer from '@/components/Footer/Footer';
 import { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 import css from './Home.module.css';
-import AuthProvider from '@/components/AuthProvider/AuthProvider';
 
 export const metadata: Metadata = {
   title: 'Web app to create and manage your own notes by categories',
@@ -59,12 +58,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={roboto.variable}>
         <TanStackProvider>
-          <AuthProvider>
-            <Header />
-            <main className={css.main}>{children}</main>
-            <Footer />
-            <div style={{ position: 'fixed', top: 0, left: 0 }}>{modal}</div>
-          </AuthProvider>
+          <Header />
+          <main className={css.main}>{children}</main>
+
+          <Footer />
+          {/* {modal} */}
+          <div style={{ position: 'fixed', top: 0, left: 0 }}>{modal}</div>
         </TanStackProvider>
       </body>
     </html>

@@ -4,7 +4,8 @@
 import { Note } from '@/types/note';
 import css from './NoteList.module.css';
 import NoteItem from '../NoteItem/NoteItem';
-import { deleteNote } from '@/lib/api/clientApi';
+// import { deleteNote } from '@/lib/api/clientApi';
+import { deleteNote } from '@/lib/api/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 type Props = {
