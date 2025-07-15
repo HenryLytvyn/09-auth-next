@@ -3,6 +3,12 @@
 import css from './EditProfilePage.module.css';
 
 export default function EditProfile() {
+  function handleSubmit(formData: FormData) {
+    // const userName = Object.fromEntries(formData);
+    const userName = formData.get('username') as string;
+    console.log(userName);
+  }
+
   return (
     <div className={css.profileCard}>
       <h1 className={css.formTitle}>Edit Profile</h1>
@@ -15,7 +21,7 @@ export default function EditProfile() {
         className={css.avatar}
       />
 
-      <form className={css.profileInfo}>
+      <form action={handleSubmit} className={css.profileInfo}>
         <div className={css.usernameWrapper}>
           <label htmlFor="username">Username:</label>
           <input id="username" type="text" className={css.input} />

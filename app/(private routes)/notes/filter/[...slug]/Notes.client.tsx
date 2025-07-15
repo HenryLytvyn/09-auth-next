@@ -1,6 +1,6 @@
 'use client';
 
-import { fetchNotes } from '@/lib/api/api';
+import { fetchNotes } from '@/lib/api/clientApi';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useDebounce } from 'use-debounce';

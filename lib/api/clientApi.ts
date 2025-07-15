@@ -1,15 +1,9 @@
-import axios from 'axios';
 import type { Note, NewNote } from '../../types/note';
 import { ResponseGetData } from '@/types/ResponseGetData';
 import { nextServer as api } from './api';
-
-axios.defaults.baseURL = 'https://notehub-public.goit.study/api';
-const notehubToken = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
-
-const headers = {
-  Accept: 'application/json',
-  Authorization: `Bearer ${notehubToken}`,
-};
+import { LoginRequest, RegisterRequest } from '@/types/apiRequestTypes';
+import { LoginResponse, RegisterResponse } from '@/types/apiResponseTypes';
+import { User } from '@/types/user';
 
 export async function fetchNotes(
   page: number,
@@ -23,22 +17,48 @@ export async function fetchNotes(
       ...(searchText !== '' ? { search: searchText } : {}),
       ...(tag !== 'All' ? { tag } : {}),
     },
-    headers,
   });
   return data;
 }
 
 export async function createNote(newNote: NewNote): Promise<Note> {
-  const { data } = await api.post<Note>('/notes', newNote, { headers });
+  const { data } = await api.post<Note>('/notes', newNote);
   return data;
 }
 
 export async function deleteNote(noteId: number): Promise<Note> {
-  const { data } = await api.delete<Note>(`/notes/${noteId}`, { headers });
+  const { data } = await api.delete<Note>(`/notes/${noteId}`);
   return data;
 }
 
 export async function fetchNoteById(noteId: number): Promise<Note> {
-  const { data } = await api.get<Note>(`/notes/${noteId}`, { headers });
+  const { data } = await api.get<Note>(`/notes/${noteId}`);
+  return data;
+}
+
+export async function register(credentials: RegisterRequest) {
+  const { data } = await api.post<RegisterResponse>(
+    `/auth/register`,
+    credentials
+  );
+  return data;
+}
+
+export async function login(credentials: LoginRequest) {
+  const { data } = await api.post<LoginResponse>(`/auth/login`, credentials);
+  return data;
+}
+
+export async function logout(): Promise<void> {
+  await api.post('/auth/logout');
+}
+
+export async function checkSession() {
+  const { data } = await api.get<{ success: true }>('/auth/session');
+  return data;
+}
+
+export async function getMe() {
+  const { data } = await api.get<User>('/users/me');
   return data;
 }

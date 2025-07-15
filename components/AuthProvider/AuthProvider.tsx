@@ -15,7 +15,7 @@ export default function AuthProvider({ children }: Props) {
   );
 
   useEffect(() => {
-    const fetchUser = async () => {
+    async function fetchUser() {
       // Перевіряємо сесію
       const isAuthenticated = await checkSession();
       if (isAuthenticated) {
@@ -26,7 +26,7 @@ export default function AuthProvider({ children }: Props) {
         // Якщо сесія невалідна — чистимо стан
         clearIsAuthenticated();
       }
-    };
+    }
     fetchUser();
   }, [setUser, clearIsAuthenticated]);
 
