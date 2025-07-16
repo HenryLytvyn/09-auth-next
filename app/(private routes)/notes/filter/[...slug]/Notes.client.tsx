@@ -8,15 +8,13 @@ import css from './NotesPage.module.css';
 import SearchBox from '@/components/SearchBox/SearchBox';
 import Pagination from '@/components/Pagination/Pagination';
 import NoteList from '@/components/NoteList/NoteList';
-import { ResponseGetData } from '@/types/ResponseGetData';
 import Link from 'next/link';
 
 type Props = {
-  initialData: ResponseGetData;
   tag: string;
 };
 
-export default function NotesClient({ initialData, tag }: Props) {
+export default function NotesClient({ tag }: Props) {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const [debouncedQuery] = useDebounce(search, 1000);
@@ -25,8 +23,6 @@ export default function NotesClient({ initialData, tag }: Props) {
     queryKey: ['allNotes', debouncedQuery, page, tag],
     queryFn: () => fetchNotes(page, debouncedQuery, tag),
     placeholderData: keepPreviousData,
-    refetchOnMount: false,
-    initialData: page === 1 && search === '' ? initialData : undefined,
   });
 
   function handleSearch(search: string) {

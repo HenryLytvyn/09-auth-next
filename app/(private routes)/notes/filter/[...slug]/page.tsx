@@ -1,4 +1,3 @@
-import { fetchNotes } from '@/lib/api/clientApi';
 import NotesClient from './Notes.client';
 import { Metadata } from 'next';
 
@@ -38,7 +37,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Notes({ params }: Props) {
   const { slug } = await params;
   const tag = slug[0];
-  const response = await fetchNotes(1, '', tag);
 
-  return <NotesClient initialData={response} tag={tag} />;
+  return <NotesClient tag={tag} />;
 }

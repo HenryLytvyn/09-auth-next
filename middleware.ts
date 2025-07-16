@@ -5,12 +5,7 @@ import { cookies } from 'next/headers';
 import { parse } from 'cookie';
 import { checkServerSession } from './lib/api/serverApi';
 
-const privateRoutes = [
-  '/profile',
-  '/profile/edit',
-  '/notes/:path*',
-  '/notes/filter/:path*',
-];
+const privateRoutes = ['/profile', '/notes'];
 const authRoutes = ['/sign-in', '/sign-up'];
 
 export async function middleware(request: NextRequest) {
@@ -23,6 +18,14 @@ export async function middleware(request: NextRequest) {
   const isPrivateRoute = privateRoutes.some(route =>
     pathname.startsWith(route)
   );
+
+  // console.log({
+  //   pathname,
+  //   isAuthRoute,
+  //   isPrivateRoute,
+  //   accessToken,
+  //   refreshToken,
+  // });
 
   if (!accessToken) {
     if (refreshToken) {

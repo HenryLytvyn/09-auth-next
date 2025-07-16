@@ -13,13 +13,13 @@ export default function EditProfile() {
     <div className={css.profileCard}>
       <h1 className={css.formTitle}>Edit Profile</h1>
 
-      <img
+      {/* <img
         src="avatar"
         alt="User Avatar"
         width={120}
         height={120}
         className={css.avatar}
-      />
+      /> */}
 
       <form action={handleSubmit} className={css.profileInfo}>
         <div className={css.usernameWrapper}>
