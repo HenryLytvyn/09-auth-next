@@ -1,6 +1,9 @@
 import { Metadata } from 'next';
 import css from './ProfilePage.module.css';
 import Link from 'next/link';
+import { getMe } from '@/lib/api/serverApi';
+import { User } from '@/types/user';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: "User's profile",
@@ -28,7 +31,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Profile() {
+export default async function Profile() {
+  const user: User = await getMe();
+
   return (
     <div className={css.profileCard}>
       <div className={css.header}>
@@ -38,17 +43,19 @@ export default function Profile() {
         </Link>
       </div>
       <div className={css.avatarWrapper}>
-        {/* <img
-          src="Avatar"
-          alt="User Avatar"
-          width={120}
-          height={120}
-          className={css.avatar}
-        /> */}
+        {user.avatar && user.avatar !== '' && (
+          <Image
+            src={user.avatar}
+            alt="User Avatar"
+            width={120}
+            height={120}
+            className={css.avatar}
+          />
+        )}
       </div>
       <div className={css.profileInfo}>
-        <p>Username: your_username</p>
-        <p>Email: your_email@example.com</p>
+        <p>Username: {user.username}</p>
+        <p>Email: {user.email}</p>
       </div>
     </div>
   );

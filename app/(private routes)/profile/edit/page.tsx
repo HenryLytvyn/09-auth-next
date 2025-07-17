@@ -1,39 +1,77 @@
 'use client';
 
+import { useAuthStore } from '@/lib/store/authStore';
 import css from './EditProfilePage.module.css';
+import { userUpdateRequest } from '@/types/user';
+import { userUpdate } from '@/lib/api/clientApi';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export default function EditProfile() {
+  const setUser = useAuthStore(state => state.setUser);
+  const user = useAuthStore(state => state.user);
+  const router = useRouter();
+
   function handleSubmit(formData: FormData) {
-    // const userName = Object.fromEntries(formData);
     const userName = formData.get('username') as string;
-    console.log(userName);
+    if (!userName.trim()) {
+      return;
+    }
+    if (user) {
+      const newUserData: userUpdateRequest = {
+        // ...user,
+        username: userName,
+      };
+      async function updatingUserData(userData: userUpdateRequest) {
+        const requestSuccess = await userUpdate(userData);
+        if (requestSuccess) {
+          setUser(requestSuccess);
+        }
+      }
+      updatingUserData(newUserData);
+    }
+
+    router.push('/profile');
   }
 
   return (
     <div className={css.profileCard}>
       <h1 className={css.formTitle}>Edit Profile</h1>
 
-      {/* <img
-        src="avatar"
-        alt="User Avatar"
-        width={120}
-        height={120}
-        className={css.avatar}
-      /> */}
+      {user?.avatar && user.avatar !== '' && (
+        <Image
+          src={user.avatar}
+          alt="User Avatar"
+          width={120}
+          height={120}
+          className={css.avatar}
+        />
+      )}
 
       <form action={handleSubmit} className={css.profileInfo}>
         <div className={css.usernameWrapper}>
           <label htmlFor="username">Username:</label>
-          <input id="username" type="text" className={css.input} />
+          <input
+            name="username"
+            id="username"
+            type="text"
+            className={css.input}
+          />
         </div>
 
-        <p>Email: user_email@example.com</p>
+        <p>{user?.email}</p>
 
         <div className={css.actions}>
           <button type="submit" className={css.saveButton}>
             Save
           </button>
-          <button type="button" className={css.cancelButton}>
+          <button
+            onClick={() => {
+              router.push('/');
+            }}
+            type="button"
+            className={css.cancelButton}
+          >
             Cancel
           </button>
         </div>

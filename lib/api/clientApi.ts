@@ -1,9 +1,13 @@
 import type { Note, NewNote } from '../../types/note';
 import { ResponseGetData } from '@/types/ResponseGetData';
 import { nextServer as api } from './api';
-import { LoginRequest, RegisterRequest } from '@/types/apiRequestTypes';
-import { LoginResponse, RegisterResponse } from '@/types/apiResponseTypes';
-import { User } from '@/types/user';
+import {
+  LoginResponse,
+  RegisterResponse,
+  LoginRequest,
+  RegisterRequest,
+} from '@/types/authorisationTypes';
+import { User, userUpdateRequest } from '@/types/user';
 
 export async function fetchNotes(
   page: number,
@@ -60,5 +64,11 @@ export async function checkSession() {
 
 export async function getMe() {
   const { data } = await api.get<User>('/users/me');
+  return data;
+}
+
+export async function userUpdate({ username }: userUpdateRequest) {
+  const { data } = await api.patch<User>('/users/me', username);
+  console.log(data);
   return data;
 }

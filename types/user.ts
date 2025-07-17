@@ -5,3 +5,5 @@ export type User = {
 };
 
 // export type RegisteredUser = Pick<User, 'username' | 'email'>;
+
+export type userUpdateRequest = Pick<User, 'username'>;
