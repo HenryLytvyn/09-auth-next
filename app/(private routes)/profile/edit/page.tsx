@@ -2,7 +2,7 @@
 
 import { useAuthStore } from '@/lib/store/authStore';
 import css from './EditProfilePage.module.css';
-import { userUpdateRequest } from '@/types/user';
+import { User } from '@/types/user';
 import { userUpdate } from '@/lib/api/clientApi';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -17,16 +17,15 @@ export default function EditProfile() {
     if (!userName.trim()) {
       return;
     }
+
     if (user) {
-      const newUserData: userUpdateRequest = {
-        // ...user,
+      const newUserData: User = {
+        email: user.email,
         username: userName,
       };
-      async function updatingUserData(userData: userUpdateRequest) {
-        const requestSuccess = await userUpdate(userData);
-        if (requestSuccess) {
-          setUser(requestSuccess);
-        }
+      async function updatingUserData(userData: User) {
+        const request = await userUpdate(userData);
+        setUser(request);
       }
       updatingUserData(newUserData);
     }

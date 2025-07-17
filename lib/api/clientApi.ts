@@ -7,7 +7,7 @@ import {
   LoginRequest,
   RegisterRequest,
 } from '@/types/authorisationTypes';
-import { User, userUpdateRequest } from '@/types/user';
+import { User } from '@/types/user';
 
 export async function fetchNotes(
   page: number,
@@ -67,8 +67,7 @@ export async function getMe() {
   return data;
 }
 
-export async function userUpdate({ username }: userUpdateRequest) {
-  const { data } = await api.patch<User>('/users/me', username);
-  console.log(data);
+export async function userUpdate(user: User) {
+  const { data } = await api.patch<User>('/users/me', user);
   return data;
 }
