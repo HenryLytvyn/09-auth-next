@@ -7,7 +7,7 @@ import Link from 'next/link';
 type Props = {
   item: Note;
   isPending: boolean;
-  removeItem: (id: number) => void;
+  removeItem: (id: string) => void;
 };
 
 export default function NoteItem({ item, isPending, removeItem }: Props) {
