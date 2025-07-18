@@ -34,47 +34,49 @@ export default function EditProfile() {
   }
 
   return (
-    <div className={css.profileCard}>
-      <h1 className={css.formTitle}>Edit Profile</h1>
+    <div className={css.mainContent}>
+      <div className={css.profileCard}>
+        <h1 className={css.formTitle}>Edit Profile</h1>
 
-      {user?.avatar && user.avatar !== '' && (
-        <Image
-          src={user.avatar}
-          alt="User Avatar"
-          width={120}
-          height={120}
-          className={css.avatar}
-        />
-      )}
-
-      <form action={handleSubmit} className={css.profileInfo}>
-        <div className={css.usernameWrapper}>
-          <label htmlFor="username">Username:</label>
-          <input
-            name="username"
-            id="username"
-            type="text"
-            className={css.input}
+        {user?.avatar && user.avatar !== '' && (
+          <Image
+            src={user.avatar}
+            alt="User Avatar"
+            width={120}
+            height={120}
+            className={css.avatar}
           />
-        </div>
+        )}
 
-        <p>{user?.email}</p>
+        <form action={handleSubmit} className={css.profileInfo}>
+          <div className={css.usernameWrapper}>
+            <label htmlFor="username">Username:</label>
+            <input
+              name="username"
+              id="username"
+              type="text"
+              className={css.input}
+            />
+          </div>
 
-        <div className={css.actions}>
-          <button type="submit" className={css.saveButton}>
-            Save
-          </button>
-          <button
-            onClick={() => {
-              router.push('/');
-            }}
-            type="button"
-            className={css.cancelButton}
-          >
-            Cancel
-          </button>
-        </div>
-      </form>
+          <p>{user?.email}</p>
+
+          <div className={css.actions}>
+            <button type="submit" className={css.saveButton}>
+              Save
+            </button>
+            <button
+              onClick={() => {
+                router.push('/');
+              }}
+              type="button"
+              className={css.cancelButton}
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
