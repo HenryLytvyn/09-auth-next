@@ -7,6 +7,7 @@
 }
 
 .profileCard {
+  min-width: 320px;
   max-width: 500px;
   width: 100%;
   background-color: #ffffff;

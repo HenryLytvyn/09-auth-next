@@ -1,4 +1,3 @@
-// Внесіть зміну у розмітку компонента NoteList.
 'use client';
 
 import { Note } from '@/types/note';

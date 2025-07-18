@@ -16,7 +16,7 @@ export default async function Header() {
               Home
             </Link>
           </li>
-          <li>
+          <li className={css.navigationItem}>
             <TagsMenu />
           </li>
           <AuthNavigation />
