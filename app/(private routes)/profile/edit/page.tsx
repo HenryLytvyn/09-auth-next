@@ -67,7 +67,7 @@ export default function EditProfile() {
             </button>
             <button
               onClick={() => {
-                router.push('/');
+                router.push('/profile');
               }}
               type="button"
               className={css.cancelButton}

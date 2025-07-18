@@ -8,7 +8,6 @@ export type ResponseGetData = {
 export type RegisterResponse = {
   username: string;
   email: string;
-  // avatar: string;
 };
 
 export type LoginResponse = {
@@ -26,11 +25,3 @@ export type LoginRequest = {
   email: string;
   password: string;
 };
-
-// export type InvalidRegisterResponse = {
-//   message: string;
-// };
-
-// export type InvalidLoginResponse = {
-//   message: string;
-// };

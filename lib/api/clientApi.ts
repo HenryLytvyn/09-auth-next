@@ -30,12 +30,12 @@ export async function createNote(newNote: NewNote): Promise<Note> {
   return data;
 }
 
-export async function deleteNote(noteId: number): Promise<Note> {
+export async function deleteNote(noteId: string): Promise<Note> {
   const { data } = await api.delete<Note>(`/notes/${noteId}`);
   return data;
 }
 
-export async function fetchNoteById(noteId: number): Promise<Note> {
+export async function fetchNoteById(noteId: string): Promise<Note> {
   const { data } = await api.get<Note>(`/notes/${noteId}`);
   return data;
 }

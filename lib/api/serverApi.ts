@@ -14,27 +14,7 @@ export async function checkServerSession() {
   return response;
 }
 
-// export async function fetchNotes(
-//   page: number,
-//   searchText: string,
-//   tag?: string
-// ): Promise<ResponseGetData> {
-//   const cookieStore = await cookies();
-//   const { data } = await api.get<ResponseGetData>('/notes', {
-//     params: {
-//       page,
-//       perPage: 16,
-//       ...(searchText !== '' ? { search: searchText } : {}),
-//       ...(tag !== 'All' ? { tag } : {}),
-//     },
-//     headers: {
-//       Cookie: cookieStore.toString(),
-//     },
-//   });
-//   return data;
-// }
-
-export async function fetchNoteById(noteId: number): Promise<Note> {
+export async function fetchNoteById(noteId: string): Promise<Note> {
   const cookieStore = await cookies();
   const { data } = await api.get<Note>(`/notes/${noteId}`, {
     headers: {
