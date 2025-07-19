@@ -9,6 +9,6 @@ export interface Note {
 
 export interface NewNote {
   title: string;
-  content?: string;
+  content: string;
   tag: 'Todo' | 'Work' | 'Personal' | 'Meeting' | 'Shopping';
 }
