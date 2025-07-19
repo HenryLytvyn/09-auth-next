@@ -49,6 +49,7 @@ export default function AuthProvider({ children }: Props) {
         setUser(user);
       } catch {
         clearIsAuthenticated();
+        console.log('ERROR!!!!!!');
       }
     }
     fetchUser();

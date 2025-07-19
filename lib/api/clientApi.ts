@@ -8,7 +8,7 @@ import {
   RegisterRequest,
 } from '@/types/authorisationTypes';
 import { User } from '@/types/user';
-import { SessionResponse } from '@/types/sessionTypes';
+// import { SessionResponse } from '@/types/sessionTypes';
 
 export async function fetchNotes(
   page: number,
@@ -59,7 +59,7 @@ export async function logout(): Promise<void> {
 }
 
 export async function checkSession() {
-  const { data } = await api.get<SessionResponse>('/auth/session');
+  const { data } = await api.get<{ success: true }>('/auth/session');
   return data;
 }
 
