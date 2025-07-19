@@ -1,8 +1,9 @@
 import { fetchNoteById } from '@/lib/api/serverApi';
-import {} from // dehydrate,
-// HydrationBoundary,
-// QueryClient,
-'@tanstack/react-query';
+// import {
+//   dehydrate,
+//   HydrationBoundary,
+//   QueryClient,
+// } from '@tanstack/react-query';
 import NoteDetailsClient from './NoteDetails.client';
 import { Metadata } from 'next';
 

@@ -58,7 +58,7 @@ export async function logout(): Promise<void> {
 }
 
 export async function checkSession() {
-  const { data } = await api.get<{ success: true }>('/auth/session');
+  const { data } = await api.get<{ message: string }>('/auth/session');
   return data;
 }
 
