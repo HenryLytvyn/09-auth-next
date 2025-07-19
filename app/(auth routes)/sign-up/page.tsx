@@ -14,6 +14,7 @@ export default function Register() {
 
   async function handleRegister(formData: FormData) {
     try {
+      setError('');
       const formValues = Object.fromEntries(formData) as RegisterRequest;
       const res = await register(formValues);
       if (res) {

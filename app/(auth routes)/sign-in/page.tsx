@@ -15,6 +15,7 @@ export default function Login() {
 
   const handleLogin = async (formData: FormData) => {
     try {
+      setError('');
       const formValues = Object.fromEntries(formData) as LoginRequest;
       const res = await login(formValues);
       if (res) {
