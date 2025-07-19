@@ -18,15 +18,18 @@ export default function AuthProvider({ children }: Props) {
     async function fetchUser() {
       // Перевіряємо сесію
       const isAuthenticated = await checkSession();
-      if (isAuthenticated.message === 'No active session found') {
-        console.log('Error 400: No active session found');
-        return;
-      }
-      if (isAuthenticated.message === 'Invalid or expired token') {
-        console.log('Error 401: Invalid or expired token');
-        return;
-      }
-      if (isAuthenticated.message === 'Session refreshed successfully') {
+      // if (isAuthenticated.message === 'No active session found') {
+      //   console.log('Error 400: No active session found');
+      //   return;
+      // }
+      // if (isAuthenticated.message === 'Invalid or expired token') {
+      //   console.log('Error 401: Invalid or expired token');
+      //   return;
+      // }
+
+      // isAuthenticated.message === 'Session refreshed successfully';
+
+      if (isAuthenticated) {
         // Якщо сесія валідна — отримуємо користувача
         const user = await getMe();
         if (user) setUser(user);
